@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author         Arandia
 // @name           Travian Distance Time Calculator
-// @version        2.0.4
+// @version        2.0.5
 // @namespace      http://userscripts.org/scripts/show/34079
 // @description    Calculates the time from your home city to the square of the map you are mousing over, for a variety of units
 // @include        http://*.travian.*/karte.php*
@@ -74,6 +74,7 @@
  * Dec  15, 2008 | Jhesthee     | Added Tagalog support
  * Dec  28, 2008 | MJanee       | Added Hungarian support
  * Jan  27, 2009 | w1ndfly3r    | Added partial Indonesian support
+ * Mar  11, 2009 | WA           | Added partial Croatian support
  **********************************************************************************************************************************************/
 
 var d_none=-1, d_highest=0, d_hi=1, d_med=2, d_low=3, d_lowest=4, d_all=4;
@@ -748,6 +749,43 @@ function loadLanguage(serverDomain){
 	    alert("Issues in tribe detection!");
 	}
 	break;
+    case 'hr':
+        /***********************************************
+         * CROATIAN (basic only)
+         ***********************************************/
+        t['tribe_type_not_found'] = "Distance_time_calculator error:\n\n"+
+            "Could not find your tribe type - please visit your profile page";
+        t['home_village_not_found'] = "Distance_time_calculator error:\n\n"+
+            "No record of your home village location - please visit your profile page";
+        t['Set as reference village'] = "Set as reference village";
+        t['Unset as reference village'] = "Unset as reference village";
+        t['distance'] = "Distance:";
+        t['time'] = "<b>Time:</b> (hrs)";
+        t['Reload Tribe'] = 'Reload Tribe';
+        t['Merchant'] = 'Merchant';
+        t['What level is your Tournament Square?'] = 'What level is your Tournament Square?';
+        
+        switch (race){
+        case 'Rimljani':
+            units = new Array('Legionnaire', 'Praetorien', 'Imperian', 'E. Legati',
+                              'E. Imperatoris', 'E. Caesaris', 'Ram', 'Fire Catapult',
+                              'Senator', 'Settler');
+            g_tribe_num = 0;
+            break;
+        case 'Teutonci':
+            units = new Array('Maceman', 'Spearman', 'Axeman', 'Scout', 'Paladin',
+                              'T. Knight', 'Ram', 'Catapult', 'Chieftain', 'Settler');
+            g_tribe_num = 1;
+            break;
+        case 'Gali':
+            units = new Array('Phalanx', 'Swordsman', 'Pathfinder', 'TT', 'Druidrider',
+                              'Haeduan', 'Ram', 'Trebuchet', 'Chief', 'Settler');
+            g_tribe_num = 2;
+            break;
+        default:
+            alert("Issues in tribe detection!");
+        }
+        break;
     case "tw":
     case "hk":
 	/***********************************************
