@@ -1,14 +1,14 @@
 // ==UserScript==
 // @author         Arandia
 // @name           Travian Distance Time Calculator
-// @version        2.0.5
+// @version        2.0.8
 // @namespace      http://userscripts.org/scripts/show/34079
 // @description    Calculates the time from your home city to the square of the map you are mousing over, for a variety of units
 // @include        http://*.travian.*/karte.php*
 // ==/UserScript==
 
 /*****************************************************************************
- * Copyright 2008, Adrian Tichler
+ * Copyright 2008, 2009 Adrian Tichler
  *
  * This is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -75,6 +75,8 @@
  * Dec  28, 2008 | MJanee       | Added Hungarian support
  * Jan  27, 2009 | w1ndfly3r    | Added partial Indonesian support
  * Mar  11, 2009 | WA           | Added partial Croatian support
+ * Mar  24, 2009 | Bjørn Erik   | Added Norwegian support
+ * May   6, 2009 | Reza_NA      | Added Persian (Farsi)
  **********************************************************************************************************************************************/
 
 var d_none=-1, d_highest=0, d_hi=1, d_med=2, d_low=3, d_lowest=4, d_all=4;
@@ -1137,6 +1139,74 @@ function loadLanguage(serverDomain){
 	    break;
 	default:
 	    alert("Problema nustatant gentį!");
+	}
+	break;
+    case "no":
+        /***********************************************
+         * NORWEGIAN
+         ***********************************************/
+        t['tribe_type_not_found'] = "Distance_time_calculator feilmelding:\n\n"+
+            "Kan ikke finne ut hvilken stamme du tilhører - vennligst gå til din profil";
+        t['home_village_not_found'] = "Distance_time_calculator feilmelding:\n\n"+
+            "Kan ikke finne koordinatene til din by - vennligst gå til din profil";
+        t['Set as reference village'] = "Sett som referanse by";
+        t['Unset as reference village'] = "Nullstille referanse by";
+        t['distance'] = "Avstand";
+        t['time'] = "<b>Tid:</b>";
+
+        switch (g_tribe){
+        case 'Romere':
+            g_units = new Array('Legionær', 'Praetorianer', 'Imperian', 'Equites Legati',
+                                'Equites Imperatoris', 'Equites Caesaris', 'Rambukk', 'Brannkatapult',
+                                'Senator', 'Nybygger');
+            g_tribe_num = 0;
+            break;
+        case 'Germanere':
+            g_units = new Array('Klubbemann', 'Spydmann', 'Øksemann', 'Speider', 'Paladin',
+                                'Teutonsk Ridder', 'Rambukk', 'Katapult', 'Høvding', 'Nybyggere');
+            g_tribe_num = 1;
+            break;
+        case 'Gallere':
+            g_units = new Array('Phalanx', 'Sverdmann', 'Stifinner',
+                                'Theutates Torden', 'Druideridder', 'Haeduaner', 'Rambukk',
+                                'Krigskatapult', 'Høvding', 'Nybyggere');
+            g_tribe_num = 2;
+            break;
+        default:
+            alert("Problem med å bestemme stammetilhørighet!");
+        }
+        break;
+    case 'ir':
+ 	/***********************************************
+	 * Persian (Farsi) [Fa-IR] UTF-8 rtl
+	 ***********************************************/
+	t['tribe_type_not_found'] = "خطا در محاسبگر_فاصله_زمان :\n\n"+
+	    "نژاد شما شناخته نشده - لطفا به صفحه پروفایل خود بروید";
+	t['home_village_not_found'] = "خطا در محاسبگر_فاصله_زمان :\n\n"+
+	    "دهکده اصلی شما شناخته نشده - لطفا به صفحه پروفایل خود بروید";
+	t['Set as reference village'] = "انتخاب به عنوان دهکده مرجع";
+	t['Unset as reference village'] = "عدم انتخاب به عنوان دهکده مرجع";
+	t['distance'] = "مسافت :";
+	t['time'] = "زمان : <b>(ساعت)</b>";
+	t['Reload Tribe'] = 'بار گزاری مجدد نژاد';
+	t['Merchant'] = 'بازرگان';
+	t['What level is your Tournament Square?'] = 'سطح میدان تمرین شما چقدر است?';
+
+	switch (race){
+	case 'رومی ها':
+	    units = new Array("سرباز لژیون", "محافظ", "شمشیرزن", "خبرچین", "شوالیه", "شوالیه سزار", "دژکوب", "منجنیق آتشین", "سناتور", "مهاجر");
+	    g_tribe_num = 0;
+	    break;
+	case 'توتن ها':
+	    units = new Array("گرزدار", "نیزه دار", "تبرزن", "جاسوس", "دلاور", "شوالیه توتن", "دژکوب", "منجنیق", "رئیس", "مهاجر");
+	    g_tribe_num = 1;
+	    break;
+	case 'گول ها':
+	    units = new Array("سرباز پیاده", "شمشیرزن", "رد یاب", "رعد", "کاهن سواره", "شوالیه گول", "دژکوب", "منجنیق", "رئیس قبیله", "مهاجر");
+	    g_tribe_num = 2;
+	    break;
+	default:
+	    alert("اشکال در شناسایی نژاد!");
 	}
 	break;
     case "pl":
