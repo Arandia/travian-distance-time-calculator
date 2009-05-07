@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author         Arandia
 // @name           Travian Distance Time Calculator
-// @version        2.0.8
+// @version        2.0.7
 // @namespace      http://userscripts.org/scripts/show/34079
 // @description    Calculates the time from your home city to the square of the map you are mousing over, for a variety of units
 // @include        http://*.travian.*/karte.php*
@@ -1187,7 +1187,7 @@ function loadLanguage(serverDomain){
 	t['Set as reference village'] = "انتخاب به عنوان دهکده مرجع";
 	t['Unset as reference village'] = "عدم انتخاب به عنوان دهکده مرجع";
 	t['distance'] = "مسافت :";
-	t['time'] = "زمان : <b>(ساعت)</b>";
+	t['time'] = "<b>زمان</b> : (ساعت)";
 	t['Reload Tribe'] = 'بار گزاری مجدد نژاد';
 	t['Merchant'] = 'بازرگان';
 	t['What level is your Tournament Square?'] = 'سطح میدان تمرین شما چقدر است?';
