@@ -1,7 +1,7 @@
 // ==UserScript==
 // @author         Arandia
 // @name           Travian Distance Time Calculator
-// @version        2.0.7
+// @version        2.0.8
 // @namespace      http://userscripts.org/scripts/show/34079
 // @description    Calculates the time from your home city to the square of the map you are mousing over, for a variety of units
 // @include        http://*.travian.*/karte.php*
@@ -77,6 +77,8 @@
  * Mar  11, 2009 | WA           | Added partial Croatian support
  * Mar  24, 2009 | Bjørn Erik   | Added Norwegian support
  * May   6, 2009 | Reza_NA      | Added Persian (Farsi)
+ * May   7, 2009 | congxz6688   | Added simplified Chinese
+ * May  12, 2009 | ivanho       | Added Serbian
  **********************************************************************************************************************************************/
 
 var d_none=-1, d_highest=0, d_hi=1, d_med=2, d_low=3, d_lowest=4, d_all=4;
@@ -823,6 +825,40 @@ function loadLanguage(serverDomain){
 	    alert("偵測種族時發生錯誤！!");
 	}
 	break;
+    case 'cn':
+    	/***********************************************
+	 * simplified chinese
+	 ***********************************************/
+	t['tribe_type_not_found'] = "Distance_time_calculator 错误:\n\n"+
+	    "无法确认您的种族 － 请浏览您的个人资料页面";
+	t['home_village_not_found'] = "Distance_time_calculator 错误:\n\n"+
+	    "无法确定您村庄的具体位置 － 请浏览您的个人资料页面";
+	t['Set as reference village'] = "设定为参照村庄";
+	t['Unset as reference village'] = "取消参照村庄的设定";
+	t['distance'] = "距离";
+	t['time'] = "<b>时间:</b> (hrs)";
+
+	switch (g_tribe){
+	case '罗马':
+	    g_units = new Array('古罗马步兵', '禁卫兵', '帝国兵', '使节骑士',
+			      '帝国骑士', '将军骑士', '冲撞车', '火焰投石器',
+			      '参议员', '拓荒者');
+	    g_tribe_num = 0;
+	    break;
+	case '日尔曼':
+	    g_units = new Array('棍棒兵', '矛兵', '斧头兵', '侦察兵', '圣骑士',
+			      '日尔曼骑士', '冲撞车', '投石器', '执政官', '拓荒者');
+	    g_tribe_num = 1;
+	    break;
+	case '高卢':
+	    g_units = new Array('方阵兵', '剑士', '探路者', '雷法师', '德鲁伊骑兵',
+			      '海顿圣骑士', '冲撞车', '投石器', '首领', '拓荒者');
+	    g_tribe_num = 2;
+	    break;
+	default:
+	    alert("侦测种族时发生错误！");
+	}
+	break;
     case 'dk':
 	/***********************************************
 	 * DANISH
@@ -1314,6 +1350,44 @@ function loadLanguage(serverDomain){
       	    alert("Ошибка определения рассы");
       	}
       	break;
+    case "rs":
+        /***********************************************
+         * Српски (Serbian)
+         ***********************************************/
+        debug(d_med, "Српски");
+        t['tribe_type_not_found'] = "Distance_time_calculator error:\n\n"+
+            "Не можемо наћи ваше племе:\n"+
+            "Молимо вас посетите ваш профил.";
+        t['home_village_not_found'] = "Distance_time_calculator error:\n\n"+
+            "Не можемо наћи ваш главни град.\n"+
+            "Молимо вас посетите ваш профил.";
+        t['Set as reference village'] = "Постави као 'reference' село";
+        t['Unset as reference village'] = "Заустави као 'reference' село";
+        t['distance'] = "Удаљеност";
+        t['time'] = "<b>Време:</b>";
+
+        switch (g_tribe){
+        case 'Римљани':
+            g_units = new Array('Легионар', 'Преториjанац', 'Империjанац', 'Извиђач',
+                                'Императорова коњица', 'Цезарева коњица', 'Ован', 'Ватрени катапулт',
+                                'Сенатор', 'Насељеник');
+            g_tribe_num = 0;
+            break;
+        case 'Тевтонци':
+            g_units = new Array('Батинар', 'Копљаник', 'Секираш', 'Извиђач', 'Паладин',
+                                'Тевтонски витез', 'Ован', 'Катапулт', 'Поглавица', 'Насељеник');
+            g_tribe_num = 1;
+            break;
+        case 'Гали':
+            g_units = new Array('Фаланга', 'Мачевалац', 'Извиђач',
+                                'Галски витез', 'Друид', 'Коњаник', 'Ован',
+                                'Катапулт', 'Старешина', 'Насељеник');
+            g_tribe_num = 2;
+            break;
+        default:
+            alert("Проблеми са детекцијом племена");
+        }
+        break;
     case 'si':
       	/***********************************************
       	 * Slovenian	 
